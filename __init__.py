@@ -2,54 +2,75 @@ from aqt import gui_hooks, mw
 from aqt.qt import QAction
 import webbrowser
 import os
+from datetime import datetime, timedelta
 
-def google_search(text):
-    webbrowser.open(f"https://www.google.com/search?q={text}")
+def google_search()-> None:
+    webbrowser.open(f"https://www.google.com/search?q={selected_text()}")
 
-def google_image_search(text):
-    webbrowser.open(f"https://www.google.com/search?q={text}&udm=2")
+def google_image_search() -> None:
+    webbrowser.open(f"https://www.google.com/search?q={selected_text()}&udm=2")
 
-def open_wikipedia(title):
-    webbrowser.open(f"https://ja.wikipedia.org/wiki/{title}")
+def open_wikipedia()-> None:
+    webbrowser.open(f"https://ja.wikipedia.org/wiki/{selected_text()}")
 
-def open_pixiv(title):
-    webbrowser.open(f"https://dic.pixiv.net/a/{title}")
+def open_pixiv()-> None:
+    webbrowser.open(f"https://dic.pixiv.net/a/{selected_text()}")
 
-def open_ansaikuropedia(title):
-    webbrowser.open(f"https://m.ansaikuropedia.org/wiki/{title}")
+def open_niconico_pedia() -> None:
+    webbrowser.open(f"https://dic.nicovideo.jp/a/{selected_text()}")
 
-def editor_google_search():
-    editor = mw.app.activeWindow().editor
-    if editor:
-        selected_text = editor.web.selectedText()
-        if selected_text:
-            google_search(selected_text)
+def twitter_search() -> None:
+    tomorrow = datetime.now() + timedelta(days=1)
+    tomorrow_str = tomorrow.strftime('%Y-%m-%d')
+    webbrowser.open(f"https://x.com/search?q={selected_text()} lang:ja until:{tomorrow_str}&f=live")
 
-def webview_google_search():
-    selected_text = mw.app.activeWindow().web.selectedText()
-    if selected_text:
-        google_search(selected_text)
+def open_ansaikuropedia()-> None:
+    webbrowser.open(f"https://m.ansaikuropedia.org/wiki/{selected_text()}")
 
-def log_message(message):
+def selected_text() -> str:
+    obj = mw.app.activeWindow()
+    if hasattr(obj,'editor'):
+        obj = obj.editor
+    return obj.web.selectedText()
+
+def log_message(message:str) -> None:
     addon_folder = os.path.dirname(__file__)
-    log_file = os.path.join(addon_folder, "debug_log.log")
+    log_file:str = os.path.join(addon_folder, "debug_log.log")
     print(message)
-    with open(log_file, "a", encoding="utf-8") as f:
-        f.write(message + "\n")
+    ## "このlog fileがサクラエディタ等で開かれていると書き込めなくてエラー"
+    # with open(log_file, "a", encoding="utf-8") as f:
+    #     f.write(message + "\n")
 
-def on_editor_context_menu(editor, menu):
-    if mw.app.activeWindow().editor.web.selectedText().strip():
+def on_context_menu(_webview, menu)-> None:
+    if selected_text().strip():
         action = QAction("Googleで検索", menu)
-        action.triggered.connect(editor_google_search)
+        action.triggered.connect(google_search)
         menu.addAction(action)
 
-def on_webview_context_menu(webview, menu):
-    if mw.app.activeWindow().web.selectedText().strip():
-        action = QAction("Googleで検索", menu)
-        action.triggered.connect(webview_google_search)
-        menu.addAction(action)
+        action2 = QAction("Googleで画像を検索", menu)
+        action2.triggered.connect(google_image_search)
+        menu.addAction(action2)
 
-gui_hooks.editor_will_show_context_menu.append(on_editor_context_menu) # Editor
-gui_hooks.webview_will_show_context_menu.append(on_webview_context_menu) # Problem
-log_message("GoogleSearchAddonがロードされました")
-log_message("このlogファイルがエディタなどで開かれているとアドオンがエラーになることが……閉じよ")
+        action3 = QAction("Wikipedia", menu)
+        action3.triggered.connect(open_wikipedia)
+        menu.addAction(action3)
+
+        action4 = QAction("Pixiv大百科", menu)
+        action4.triggered.connect(open_pixiv)
+        menu.addAction(action4)
+
+        action5 = QAction("Twitter", menu)
+        action5.triggered.connect(twitter_search)
+        menu.addAction(action5)
+
+        action6 = QAction("ニコニコ大百科", menu)
+        action6.triggered.connect(open_niconico_pedia)
+        menu.addAction(action6)
+
+        action7 = QAction("アンサイクロペディア", menu)
+        action7.triggered.connect(open_ansaikuropedia)
+        menu.addAction(action7)
+
+gui_hooks.editor_will_show_context_menu.append(on_context_menu) # Editor
+gui_hooks.webview_will_show_context_menu.append(on_context_menu) # Problem
+# log_message("GoogleSearchAddonがロードされました")
