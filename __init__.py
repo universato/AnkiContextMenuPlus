@@ -3,35 +3,40 @@ from aqt import gui_hooks, mw
 from aqt.qt import QAction
 from datetime import datetime, timedelta
 import os
+import urllib.parse
 import webbrowser
 
+def open_selected_text_web(format_url):
+    webbrowser.open(format_url.format(urllib.parse.quote(selected_text())))
+
 def google_search()-> None:
-    webbrowser.open(f"https://www.google.com/search?q={selected_text()}")
+    open_selected_text_web("https://www.google.com/search?q={}")
 
 def google_image_search() -> None:
-    webbrowser.open(f"https://www.google.com/search?q={selected_text()}&udm=2")
+    open_selected_text_web("https://www.google.com/search?q={}&udm=2")
 
 def open_wikipedia()-> None:
-    webbrowser.open(f"https://ja.wikipedia.org/wiki/{selected_text()}")
+    open_selected_text_web("https://ja.wikipedia.org/wiki/{}")
 
 def search_in_collection():
     browser = dialogs.open("Browser", mw)
-    browser.form.searchEdit.lineEdit().setText(selected_text())
+    browser.form.searchEdit.lineEdit().setText(urllib.parse.quote(selected_text()))
     browser.onSearchActivated()
 
 def open_pixiv()-> None:
-    webbrowser.open(f"https://dic.pixiv.net/a/{selected_text()}")
+    open_selected_text_web("https://dic.pixiv.net/a/{}")
 
 def open_niconico_pedia() -> None:
-    webbrowser.open(f"https://dic.nicovideo.jp/a/{selected_text()}")
+    open_selected_text_web("https://dic.nicovideo.jp/a/{}")
 
 def twitter_search() -> None:
     tomorrow = datetime.now() + timedelta(days=1)
     tomorrow_str = tomorrow.strftime('%Y-%m-%d')
-    webbrowser.open(f"https://x.com/search?q={selected_text()} lang:ja until:{tomorrow_str}&f=live")
+    url = "https://x.com/search?q={}&f=live".format(urllib.parse.quote(f"{selected_text()} lang:ja until:{tomorrow_str}"))
+    webbrowser.open(url)
 
 def open_ansaikuropedia()-> None:
-    webbrowser.open(f"https://m.ansaikuropedia.org/wiki/{selected_text()}")
+    open_selected_text_web("https://m.ansaikuropedia.org/wiki/{}")
 
 def selected_text() -> str:
     obj = mw.app.activeWindow()
