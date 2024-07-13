@@ -19,8 +19,9 @@ def open_wikipedia()-> None:
     open_selected_text_web("https://ja.wikipedia.org/wiki/{}")
 
 def search_in_collection():
+    search_text = selected_text()
     browser = dialogs.open("Browser", mw)
-    browser.form.searchEdit.lineEdit().setText(urllib.parse.quote(selected_text()))
+    browser.form.searchEdit.lineEdit().setText(search_text)
     browser.onSearchActivated()
 
 def open_pixiv()-> None:
