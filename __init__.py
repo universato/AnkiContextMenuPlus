@@ -43,7 +43,10 @@ def selected_text() -> str:
     obj = mw.app.activeWindow()
     if hasattr(obj,'editor'):
         obj = obj.editor
-    return obj.web.selectedText().strip()
+    if hasattr(obj,'web'):
+        return obj.web.selectedText().strip()
+    else:
+        return ''
 
 def log_message(message:str) -> None:
     addon_folder = os.path.dirname(__file__)
