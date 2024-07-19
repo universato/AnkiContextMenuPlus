@@ -8,7 +8,7 @@ open -a Anki
 
 デバッグできるように開くとき ※ print()が出力される。
 ```console
-/Applications/Anki.app/Contents/MacOS/Anki 
+/Applications/Anki.app/Contents/MacOS/Anki
 ```
 ※ これで開くと、動作が変わることがある。
 
@@ -67,3 +67,7 @@ macOSでは、内部で異なるエンコード処理が行われる場合があ
 URL全体をエンコードするとエラーにならないけど、何も起きなかった。
 URLとして認識されてない動作に見える。
 「https://」の「:」を「%3A」に変換してはならないのだと思う。
+
+#
+
+PyQt6.QtGui.QAction

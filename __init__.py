@@ -73,6 +73,10 @@ def on_context_menu(_webview, menu) -> None:
             action = QAction(title, menu)
             action.triggered.connect(func)
             menu.addAction(action)
+    else:
+        for action in menu.actions():
+            if action.text() in ('Copy', 'コピー', 'Cut', 'カット'):
+                menu.removeAction(action)
 
 gui_hooks.editor_will_show_context_menu.append(on_context_menu) # Editor
 gui_hooks.webview_will_show_context_menu.append(on_context_menu) # Problem
