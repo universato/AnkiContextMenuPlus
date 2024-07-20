@@ -71,3 +71,24 @@ URLとして認識されてない動作に見える。
 #
 
 PyQt6.QtGui.QAction
+
+# HTMLからPythonを呼ぶ
+
+```py
+def search_in_collection2(text):
+    browser = dialogs.open("Browser", mw)
+    browser.form.searchEdit.lineEdit().setText(text)
+    browser.onSearchActivated()
+
+def on_js_message(handled, message, context):
+    if message.startswith('search_button('):
+        search_in_collection2(message[14:-1])
+        return True, False
+    return handled
+
+gui_hooks.webview_did_receive_js_message.append(on_js_message)
+```
+
+```html
+<span class="link_button" onclick="pycmd('search_button({{Back}})')">Anki</span>
+```

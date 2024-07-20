@@ -80,3 +80,16 @@ def on_context_menu(_webview, menu) -> None:
 
 gui_hooks.editor_will_show_context_menu.append(on_context_menu) # Editor
 gui_hooks.webview_will_show_context_menu.append(on_context_menu) # Problem
+
+def search_in_collection2(text):
+    browser = dialogs.open("Browser", mw)
+    browser.form.searchEdit.lineEdit().setText(text)
+    browser.onSearchActivated()
+
+def on_js_message(handled, message, context):
+    if message.startswith('search_button('):
+        search_in_collection2(message[14:-1])
+        return True, False
+    return handled
+
+gui_hooks.webview_did_receive_js_message.append(on_js_message)
