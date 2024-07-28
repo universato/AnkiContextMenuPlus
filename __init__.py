@@ -6,7 +6,7 @@ import urllib.parse
 import webbrowser
 
 
-def open_selected_text_web(format_url):
+def open_selected_text_web(format_url) -> None:
     webbrowser.open(format_url.format(urllib.parse.quote(selected_text())))
 
 
@@ -39,7 +39,7 @@ def open_niconico_pedia() -> None:
 
 def twitter_search() -> None:
     tomorrow = datetime.now() + timedelta(days=1)
-    tomorrow_str = tomorrow.strftime('%Y-%m-%d')
+    tomorrow_str: str = tomorrow.strftime('%Y-%m-%d')
     url = "https://x.com/search?f=live&q={}".format(
         urllib.parse.quote(f"{selected_text()} lang:ja until:{tomorrow_str}"))
     webbrowser.open(url)
