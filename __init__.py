@@ -40,7 +40,7 @@ def open_niconico_pedia() -> None:
 def twitter_search() -> None:
     tomorrow = datetime.now() + timedelta(days=1)
     tomorrow_str = tomorrow.strftime('%Y-%m-%d')
-    url = "https://x.com/search?q={}&f=live".format(
+    url = "https://x.com/search?f=live&q={}".format(
         urllib.parse.quote(f"{selected_text()} lang:ja until:{tomorrow_str}"))
     webbrowser.open(url)
 
@@ -67,7 +67,8 @@ def log_message(message: str) -> None:
     # with open(log_file, 'a', encoding='utf-8') as f:
     #     f.write(message + "\n")
 
-
+# _webview: aqt.webview.AnkiWebView or aqt.editor.EditorWebView
+# menu: QMenu
 def on_context_menu(_webview, menu) -> None:
     if selected_text():
         actions = [
@@ -95,16 +96,17 @@ gui_hooks.editor_will_show_context_menu.append(on_context_menu)  # Editor
 gui_hooks.webview_will_show_context_menu.append(on_context_menu)  # Problem
 
 
-def search_in_collection2(text):
+def search_in_collection2(text) -> None:
     browser = dialogs.open('Browser', mw)
     browser.form.searchEdit.lineEdit().setText(text)
     browser.onSearchActivated()
 
-
-def on_js_message(handled, message, context):
+# args=["handled: tuple[bool, Any]", "message: str", "context: Any"],
+# return_type="tuple[bool, Any]",
+def on_js_message(handled, message, _context):
     if message.startswith('search_button('):
         search_in_collection2(message[14:-1])
-        return True, False
+        return (True, None)
     return handled
 
 
