@@ -184,3 +184,14 @@ else:
     # 他のコマンドに渡す
     return handled
 ```
+
+
+```py
+gui_hooks.editor_will_show_context_menu.append(on_context_menu)  # Editor
+gui_hooks.webview_will_show_context_menu.append(on_context_menu)  # Problem
+gui_hooks.browser_will_show_context_menu.append(on_context_menu)
+gui_hooks.browser_header_will_show_context_menu.append(on_context_menu)
+gui_hooks.reviewer_will_show_context_menu.append(on_context_menu)
+```
+
+下3つはエラーにならないけど、特に不要。
