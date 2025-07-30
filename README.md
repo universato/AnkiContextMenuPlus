@@ -63,7 +63,7 @@ print(urllib.parse.quote(text)) #=> %20/%2B%26%3A%3D%3F
 
 
 
-```
+```log
     webbrowser.open(format_url.format(selected_text()))
   File "webbrowser", line 86, in open
   File "webbrowser", line 683, in open
