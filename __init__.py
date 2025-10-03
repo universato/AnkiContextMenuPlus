@@ -22,18 +22,18 @@ def open_wikipedia() -> None:
     open_selected_text_web("https://ja.wikipedia.org/wiki/{}")
 
 
-def search_in_collection():
+def search_in_anki_collection():
     search_text = selected_text()
     browser = dialogs.open('Browser', mw)
     browser.form.searchEdit.lineEdit().setText(search_text)
     browser.onSearchActivated()
 
 
-def open_pixiv() -> None:
+def open_pixiv_dic() -> None:
     open_selected_text_web("https://dic.pixiv.net/a/{}")
 
 
-def open_niconico_pedia() -> None:
+def open_niconico_dic() -> None:
     open_selected_text_web("https://dic.nicovideo.jp/a/{}")
 
 
@@ -75,10 +75,10 @@ def on_context_menu(_webview, menu) -> None:
             ('Googleで検索', google_search),
             ('Googleで画像を検索', google_image_search),
             ('Wikipedia', open_wikipedia),
-            ('Anki内で検索', search_in_collection),
-            ('Pixiv大百科', open_pixiv),
+            ('Anki内で検索', search_in_anki_collection),
+            ('Pixiv百科事典', open_pixiv_dic),
             ('Twitter', twitter_search),
-            ('ニコニコ大百科', open_niconico_pedia),
+            ('ニコニコ大百科', open_niconico_dic),
             ('アンサイクロペディア', open_ansaikuropedia),
         ]
 
@@ -96,7 +96,7 @@ gui_hooks.editor_will_show_context_menu.append(on_context_menu)  # Editor
 gui_hooks.webview_will_show_context_menu.append(on_context_menu)  # Problem
 
 
-def search_in_collection2(text) -> None:
+def search_in_anki_collection2(text) -> None:
     browser = dialogs.open('Browser', mw)
     browser.form.searchEdit.lineEdit().setText(text)
     browser.onSearchActivated()
@@ -105,7 +105,7 @@ def search_in_collection2(text) -> None:
 # return_type="tuple[bool, Any]",
 def on_js_message(handled, message, _context):
     if message.startswith('search_button('):
-        search_in_collection2(message[14:-1])
+        search_in_anki_collection2(message[14:-1])
         return (True, None)
     return handled
 
