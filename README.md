@@ -69,7 +69,7 @@ print(urllib.parse.quote(text)) #=> %20/%2B%26%3A%3D%3F
   File "webbrowser", line 683, in open
 UnicodeEncodeError: 'ascii' codec can't encode characters in position 47-54: ordinal not in range(128)
 ```
-macOSでは、内部で異なるエンコード処理が行われる場合があり、特に非ASCII文字(日本語など)が含まれるとエンコードエラーが発生することがあるらしい。urllib.parse.quoteを使用することで、こうした文字を適切にエンコードし、エラーを回避できる。
+macOSでは、内部で異なるエンコード処理が行われる場合があり、特に非ASCII文字(日本語など)が含まれるとエンコードエラーが発生することがあるらしい。`urllib.parse.quote`を使用することで、こうした文字を適切にエンコードし、エラーを回避できる。
 
 URL全体をエンコードするとエラーにならないけど、何も起きなかった。
 URLとして認識されてない動作に見える。
