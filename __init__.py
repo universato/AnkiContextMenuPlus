@@ -22,7 +22,7 @@ def open_wikipedia() -> None:
     open_selected_text_web("https://ja.wikipedia.org/wiki/{}")
 
 
-def search_in_anki_collection():
+def search_in_anki_collection() -> None:
     search_text = selected_text()
     browser = dialogs.open('Browser', mw)
     browser.form.searchEdit.lineEdit().setText(search_text)
