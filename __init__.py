@@ -46,7 +46,7 @@ def twitter_search() -> None:
 
 
 def open_ansaikuropedia() -> None:
-    open_selected_text_web("https://m.ansaikuropedia.org/wiki/{}")
+    open_selected_text_web("https://ansaikuropedia.org/wiki/{}")
 
 
 def selected_text() -> str:
