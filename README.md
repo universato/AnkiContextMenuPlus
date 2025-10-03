@@ -6,14 +6,16 @@ Ankiアドオン
 - 何も選択してないときに、不要なコンテキストメニューを非表示
 - 簡単にAnki内コレクションを検索できるように。
 
-# Macのターミナルから開くとき
+# 開発用メモs
+
+## Macのターミナルから開くとき
 
 単に開くとき
 ```console
 open -a Anki
 ```
 
-デバッグできるように開くとき ※ print()が出力される。
+デバッグできるように開くとき ※ `print()`が出力される。
 ```console
 /Applications/Anki.app/Contents/MacOS/Anki
 ```
@@ -24,7 +26,7 @@ open -a Anki
 ターミナルで開くと無理やりエンコードしたぽいで検索する。ex)コンパイラ->ÉRÉìÉpÉCÉâ
 
 
-# MacとWindowsの違い
+## MacとWindowsの違い
 
 Macのwebview(問題を解くとき)だけうまくいかない。タイミングが揃わない。
 ```py
@@ -43,7 +45,7 @@ def search_in_collection():
     browser.onSearchActivated()
 ```
 
-# Python基本動作
+## Python基本動作
 
 ```py
 import urllib.parse
@@ -75,11 +77,11 @@ URL全体をエンコードするとエラーにならないけど、何も起�
 URLとして認識されてない動作に見える。
 「https://」の「:」を「%3A」に変換してはならないのだと思う。
 
-#
+##
 
 PyQt6.QtGui.QAction
 
-# HTMLからPythonを呼ぶ
+## HTMLからPythonを呼ぶ
 
 ```py
 def search_in_collection2(text):
@@ -100,7 +102,7 @@ gui_hooks.webview_did_receive_js_message.append(on_js_message)
 <span class="link_button" onclick="pycmd('search_button({{Back}})')">Anki</span>
 ```
 
-# Anki
+## Anki
 
 
 ```py anki/qt/tools/genhooks_gui.py
