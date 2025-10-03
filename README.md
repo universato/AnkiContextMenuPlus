@@ -197,3 +197,7 @@ gui_hooks.reviewer_will_show_context_menu.append(on_context_menu)
 ```
 
 下3つはエラーにならないけど、特に不要。
+
+## meta.json
+
+meta.jsonは、Ankiアプリが自動で作成するもなので、git履歴に含めないようにする。
