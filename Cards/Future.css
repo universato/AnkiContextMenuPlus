@@ -1,0 +1,47 @@
+.card {
+    font-family: arial;
+    font-size: 20px;
+    text-align: left;
+    color: black;
+    background-color: white;
+}
+
+.links {
+    font-family: arial;
+    font-size: 12px;
+    text-align: right;
+    color: gray;
+    background-color: white;
+}
+
+a:link {
+ color: lightblue;
+ text-decoration: none;
+}
+
+a:link:hover {
+ color: #ff7043;
+}
+
+.link_button {
+  margin: 2px;
+  color: lightblue;
+}
+
+.link_button:hover {
+  color: #ff7043;
+}
+
+.subdeck {
+    font-family: arial;
+    font-size: 12px;
+    text-align: right;
+    color: gray;
+    background-color: white;
+}
+
+.tags {
+    font-family: arial;
+    font-size: 8px;
+    text-align: right;
+}
