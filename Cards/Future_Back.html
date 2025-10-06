@@ -19,12 +19,12 @@
   <a href="https://dic.pixiv.net/a/{{Back}}" class="link">Pixiv</a>
   <a href="https://ansaikuropedia.org/wiki/{{Back}}" class="link">A</a>
 
-   <span class="link_button" onclick="pycmd('search_button({{Back}})')">Anki</span>
+  <span class="link_button" onclick="pycmd('search_button({{Back}})')">Anki</span>
 </div>
 {{/Back}}
 
 <div class="subdeck">{{Subdeck}}</div>
-<div class="tags">{{clickable::Tags}}</div>
+<div class="tags">{{clickable::Tags}}</div><!-- https://ankiweb.net/shared/info/1739176371 -->
 
 
     <script>
@@ -37,6 +37,5 @@
                 link.setAttribute('href', newHref);        // 新しいhrefを設定
             });
         }
-
         removeSpecificCharactersFromLinks();
     </script>
