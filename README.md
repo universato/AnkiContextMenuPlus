@@ -6,7 +6,7 @@ Ankiアドオン
 - 何も選択してないときに、不要なコンテキストメニューを非表示
 - 簡単にAnki内コレクションを検索できるように。
 
-# 開発用メモs
+# 開発用メモ
 
 ## Macのターミナルから開くとき
 
@@ -201,3 +201,52 @@ gui_hooks.reviewer_will_show_context_menu.append(on_context_menu)
 ## meta.json
 
 meta.jsonは、Ankiアプリが自動で作成するもなので、git履歴に含めないようにする。
+
+## コピーや切り取り
+
+何も文章の選択がなかったときは、デフォルトのコンテキストメニューにある「コピー」や「切り取り」を削除する。
+
+何もないところで、クリックすると「貼り付け」がでてしまう。
+
+## テンプレートのSQL
+
+各ノートタイプが、HTMLのようなノートタイプを持っている。
+
+```sql
+SELECT nt.name, t.name, CAST(t.config AS TEXT) FROM templates AS t INNER JOIN notetypes AS nt ON t.ntid = nt.id where nt.name = "Basic" ORDER BY nt.name COLLATE NOCASE;
+
+SELECT nt.name, t.name, CAST(t.config AS TEXT) 
+FROM templates AS t 
+INNER JOIN notetypes AS nt 
+ON t.ntid = nt.id 
+where nt.name = "Basic" 
+ORDER BY nt.name COLLATE NOCASE;
+```
+
+## Anki検索方法
+
+デッキで絞る方法: deck:IT
+ノートタイプで絞る方法: note:"Basic", "note:Basic (裏表反転カード付き)"
+アンダーバーは、`\_`で表記する必要があるかもしれない。
+
+``` 
+note:"Basic" # ノートタイプで絞る方法
+deck:IT
+```
+
+# 便利なアドオン
+
+## 1020366288 Edit Field During Review
+
+ノートタイプのテンプレートの`{{Front}}`を`{{edit:Front}}`のように置き換えることで、直接編集可能になる。
+
+```json config.json
+{
+    "debug": true,
+    "tag": "span",
+    "undo": true
+}
+```
+
+初期値のtagは`<div>`タグで囲まれるので、強制的にブロックになってしまう。
+これをインラインにするには`<span>`を指定するようにする。
