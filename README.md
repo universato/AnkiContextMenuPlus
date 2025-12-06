@@ -251,3 +251,22 @@ deck:IT
 
 初期値のtagは`<div>`タグで囲まれるので、強制的にブロックになってしまう。
 これをインラインにするには`<span>`を指定するようにする。
+
+# 直接問題を閲覧
+
+データベースを壊したときに、直近の追加した問題を閲覧したいときのSQL。
+
+id列はミリ秒だが、mod列は秒で記録されている。
+
+```sql
+SELECT
+  n.id,
+  datetime(n.id/1000,'unixepoch','localtime') AS added_at,
+  datetime(n.mod,'unixepoch','localtime') AS modified_at,
+  n.tags,
+  n.sfld,
+  n.flds
+FROM notes n
+WHERE n.id >= (strftime('%s','now','-7 days') * 1000)   -- 過去7日間に更新されたノート
+ORDER BY n.mod DESC;
+```
