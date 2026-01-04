@@ -2,19 +2,19 @@
 
 <hr id=answer>
 
-{{Back}}
-{{#yomi}}({{yomi}}){{/yomi}}<br>
+{{editSpan:Back}}
+{{#yomi}}({{editSpan:yomi}}){{/yomi}}<br>
 
-{{#memo}}{{memo}}<br>{{/memo}}
+{{#memo}}{{edit:memo}}<br>{{/memo}}
 
-{{#images}}{{images}}<br>{{/images}}
+{{#images}}{{edit:images}}<br>{{/images}}
 
 {{#Back}}
 <div class="links">
   <a href="https://ja.wikipedia.org/wiki/{{Back}}" class="link">Wikipedia</a>
   <a href="https://www.google.com/search?q={{Back}}" class="link">Google</a>
   <a href="https://www.google.com/search?q={{Back}}&udm=2" class="link">画像</a>
-  <a href="https://x.com/search?q={{Back}} lang:ja&f=live">X</a>
+  <a href="https://x.com/search?q={{Back}} lang:ja&f=live" class="link">X</a>
   <a href="https://dic.nicovideo.jp/a/{{Back}}" class="link">ニコニコ</a>
   <a href="https://dic.pixiv.net/a/{{Back}}" class="link">Pixiv</a>
   <a href="https://ansaikuropedia.org/wiki/{{Back}}" class="link">A</a>
@@ -24,7 +24,7 @@
 {{/Back}}
 
 <div class="subdeck">{{Subdeck}}</div>
-<div class="tags">{{clickable::Tags}}</div><!-- https://ankiweb.net/shared/info/1739176371 -->
+<div class="tags">{{clickable::Tags}}</div>
 
 
     <script>
@@ -37,5 +37,6 @@
                 link.setAttribute('href', newHref);        // 新しいhrefを設定
             });
         }
+
         removeSpecificCharactersFromLinks();
     </script>

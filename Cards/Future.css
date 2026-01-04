@@ -3,7 +3,6 @@
     font-size: 20px;
     text-align: left;
     color: black;
-    background-color: white;
 }
 
 .links {
@@ -13,12 +12,12 @@
     color: gray;
 }
 
-a:link {
+a.link:link {
  color: lightblue;
  text-decoration: none;
 }
 
-a:link:hover {
+a.link:link:hover {
  color: #ff7043;
 }
 
