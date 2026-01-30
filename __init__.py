@@ -28,6 +28,10 @@ def search_in_anki_collection() -> None:
     browser.form.searchEdit.lineEdit().setText(search_text)
     browser.onSearchActivated()
 
+def open_url() -> None:
+    url = selected_text()
+    webbrowser.open(url)
+
 
 def open_pixiv_dic() -> None:
     open_selected_text_web("https://dic.pixiv.net/a/{}")
@@ -76,6 +80,7 @@ def on_context_menu(_webview, menu) -> None:
             ('Googleで画像を検索', google_image_search),
             ('Wikipedia', open_wikipedia),
             ('Anki内で検索', search_in_anki_collection),
+            ('直リンク:URL', open_url),
             ('Pixiv百科事典', open_pixiv_dic),
             ('Twitter', twitter_search),
             ('ニコニコ大百科', open_niconico_dic),
