@@ -6,6 +6,8 @@ Ankiアドオン
 - 何も選択してないときに、不要なコンテキストメニューを非表示
 - 簡単にAnki内コレクションを検索できるように。
 
+https://github.com/universato/AnkiContextMenuPlus
+
 # 開発用メモ
 
 ## Macのターミナルから開くとき
@@ -199,9 +201,11 @@ gui_hooks.reviewer_will_show_context_menu.append(on_context_menu)
 
 下3つはエラーにならないけど、特に不要。
 
-## meta.json
+## .gitignore
 
-meta.jsonは、Ankiアプリが自動で作成するもなので、git履歴に含めないようにする。
+以下のものは、git履歴に含めないようにする。
+- __pycache__ : Pythonが実行時に生成するキャッシュファイル（.pyc）が入る。
+- meta.json : Ankiアプリが自動で作成するもの。
 
 ## コピーや切り取り
 
@@ -226,14 +230,23 @@ ORDER BY nt.name COLLATE NOCASE;
 
 ## Anki検索方法
 
-デッキで絞る方法: deck:IT
-ノートタイプで絞る方法: note:"Basic", "note:Basic (裏表反転カード付き)"
+- デッキで絞る方法: deck:IT
+- ノートタイプで絞る方法: note:"Basic", "note:Basic (裏表反転カード付き)"
+
 アンダーバーは、`\_`で表記する必要があるかもしれない。
 
 ``` 
-note:"Basic" # ノートタイプで絞る方法
+note:"Basic" # ノートタイプで絞る
 deck:IT
+added:10 # 10日以内に追加したので絞る
+is:new
+is:learn
+is:due
+is:review
 ```
+
+カードは、new → learn → review の3段階が基本。
+dueは、時間に依存する概念で、今学習すべきもの。
 
 # 便利なアドオン
 
